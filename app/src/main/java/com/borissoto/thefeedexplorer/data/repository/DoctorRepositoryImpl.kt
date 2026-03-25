@@ -12,4 +12,8 @@ class DoctorRepositoryImpl @Inject constructor(
     override suspend fun getDoctors(): List<DoctorDto> {
         return api.getDoctors()
     }
+
+    override suspend fun getDoctorById(id: String): DoctorDto? {
+        return api.getDoctors().find { it.id == id.toIntOrNull() }
+    }
 }

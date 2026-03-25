@@ -1,4 +1,4 @@
-package com.borissoto.thefeedexplorer.domain.use_case.get_doctors
+package com.borissoto.thefeedexplorer.domain.use_case.get_doctor
 
 import coil.network.HttpException
 import com.borissoto.thefeedexplorer.common.Resource
@@ -10,15 +10,19 @@ import kotlinx.coroutines.flow.flow
 import java.io.IOException
 import javax.inject.Inject
 
-class GetDoctorsUseCase @Inject constructor(
+class GetDoctorUseCase @Inject constructor(
     private val repository: DoctorRepository
 
 ){
-    operator fun invoke(): Flow<Resource<List<Doctor>>> = flow {
+    operator fun invoke(doctorId: String): Flow<Resource<Doctor>> = flow {
         try {
-            emit(Resource.Loading<List<Doctor>>())
-            val doctors = repository.getDoctors().map { it.toDoctor() }
-            emit(Resource.Success<List<Doctor>>(doctors))
+            emit(Resource.Loading<Doctor>())
+            val doctor = repository.getDoctorById(doctorId)
+            if (doctor != null) {
+                emit(Resource.Success(doctor.toDoctor()))
+            } else {
+                emit(Resource.Error("No Doctor found!"))
+            }
         }catch (e: HttpException){
             emit(Resource.Error(e.localizedMessage ?: "An unexpected error occurred"))
         }catch (e: IOException){

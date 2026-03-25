@@ -16,8 +16,10 @@ data class DoctorDto(
 
 fun DoctorDto.toDoctor(): Doctor {
     return Doctor(
+        id = id,
         first_name = first_name,
         last_name = last_name,
         specialty = specialty,
     )
 }
+
