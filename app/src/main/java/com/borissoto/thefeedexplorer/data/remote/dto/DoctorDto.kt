@@ -2,7 +2,7 @@ package com.borissoto.thefeedexplorer.data.remote.dto
 
 import com.borissoto.thefeedexplorer.domain.model.Doctor
 
-data class DoctorDTO(
+data class DoctorDto(
     val accepting_new_patients: Boolean,
     val first_name: String,
     val id: Int,
@@ -14,7 +14,7 @@ data class DoctorDTO(
     val suffix: String
 )
 
-fun DoctorDTO.toDoctor(): Doctor {
+fun DoctorDto.toDoctor(): Doctor {
     return Doctor(
         first_name = first_name,
         last_name = last_name,
