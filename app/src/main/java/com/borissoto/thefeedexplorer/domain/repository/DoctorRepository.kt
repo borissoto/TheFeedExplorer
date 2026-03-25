@@ -1,8 +1,8 @@
 package com.borissoto.thefeedexplorer.domain.repository
 
-import com.borissoto.thefeedexplorer.data.remote.dto.DoctorDTO
+import com.borissoto.thefeedexplorer.data.remote.dto.DoctorDto
 
 interface DoctorRepository {
 
-    suspend fun getDoctors(): List<DoctorDTO>
+    suspend fun getDoctors(): List<DoctorDto>
 }
